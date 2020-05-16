@@ -5,7 +5,6 @@ export interface User {
   username?: string;
   avatar?: string;
   email?: string;
-  password?: string;
   authProviders?: Array<Provider>;
   _createdOn?: Date;
   _updatedOn?: Date;
