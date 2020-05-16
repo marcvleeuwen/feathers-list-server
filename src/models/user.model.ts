@@ -4,8 +4,16 @@ export interface User {
   _id?: string;
   username?: string;
   avatar?: string;
-  email?: string;
-  authProviders?: Array<Provider>;
-  _createdOn?: Date;
-  _updatedOn?: Date;
+  password?: string;
+  authProviders?: Providers;
+  _createdAt?: Date;
+  _updatedAt?: Date;
+}
+
+interface Providers {
+  github?: string;
+  google?: string;
+  facebook?: string;
+  twitter?: string;
+  auth0?: string;
 }

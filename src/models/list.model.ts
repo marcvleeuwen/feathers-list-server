@@ -7,6 +7,6 @@ export interface List {
 	details?: Descriptor;
 	items?: Array<Item>
 	users?: Array<ListUser>;
-	_createdOn?: Date;
-	_updatedOn?: Date;
+	_createdAt?: Date;
+	_updatedAt?: Date;
 }

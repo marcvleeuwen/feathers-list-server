@@ -1,14 +1,16 @@
-import processTimestamp from './hooks/process-timestamp';// Application hooks that run for every service
+import * as authentication from '@feathersjs/authentication';
 // Don't remove this comment. It's needed to format import lines nicely.
+
+const { authenticate } = authentication.hooks;
 
 export default {
   before: {
-    all: [],
+    all: [ authenticate('jwt') ],
     find: [],
     get: [],
-    create: [processTimestamp()],
-    update: [processTimestamp()],
-    patch: [processTimestamp()],
+    create: [],
+    update: [],
+    patch: [],
     remove: []
   },
 

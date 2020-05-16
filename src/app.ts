@@ -18,7 +18,10 @@ import appHooks from './app.hooks';
 import channels from './channels';
 import authentication from './authentication';
 import mongodb from './mongodb';
+import dotenv from 'dotenv';
 // Don't remove this comment. It's needed to format import lines nicely.
+
+dotenv.config();
 
 const app: Application = express(feathers());
 
