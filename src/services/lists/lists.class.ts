@@ -2,7 +2,6 @@ import { Db } from "mongodb";
 import { Service, MongoDBServiceOptions } from "feathers-mongodb";
 import { Application } from "../../declarations";
 import { List } from "../../models/list.model";
-import app from "../../app";
 
 export class Lists extends Service {
   constructor(options: Partial<MongoDBServiceOptions>, app: Application) {
@@ -36,9 +35,6 @@ export class Lists extends Service {
 
   update(data: any, params: any): Promise<any> {
     const { details, updatedAt, items } = params;
-
-    console.log('update data', data);
-    console.log('update params', params);
 
     const listData: List = {
       details,

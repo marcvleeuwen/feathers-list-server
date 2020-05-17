@@ -5,6 +5,7 @@ export interface Item {
 	details?: Descriptor;
 	category?: string;
 	status?: string;
-	_createdOn?: Date;
-	_updatedOn?: Date
+	quantity?: string;
+	_createdAt?: Date;
+	_updatedAt?: Date
 }

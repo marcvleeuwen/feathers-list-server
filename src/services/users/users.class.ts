@@ -1,4 +1,4 @@
-import { Db } from "mongodb";
+import { Db, ObjectId } from "mongodb";
 import { Service, MongoDBServiceOptions } from "feathers-mongodb";
 import { Application } from "../../declarations";
 import * as crypto from "crypto";
@@ -51,6 +51,8 @@ export class Users extends Service {
 
     
     const userData: User = {
+      ...data,
+      _id: new ObjectId(params.id),
       avatar: avatar,
       username: username,
       password: password,
