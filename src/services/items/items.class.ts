@@ -1,8 +1,8 @@
-import { Db, ObjectID } from "mongodb";
-import { Service, MongoDBServiceOptions } from "feathers-mongodb";
-import { Application } from "../../declarations";
-import { List } from "../../models/list.model";
-import { Item } from "../../models/item.model";
+import {Db, ObjectID} from "mongodb";
+import {MongoDBServiceOptions, Service} from "feathers-mongodb";
+import {Application} from "../../declarations";
+import {List} from "../../models/list.model";
+import {Item} from "../../models/item.model";
 
 export class Items extends Service {
   constructor(
@@ -19,23 +19,44 @@ export class Items extends Service {
   }
 
   async create(data: any, params: any): Promise<any> {
-    const { listId, items, createdAt } = data;
+    const {listId, items, createdAt} = data;
 
     const listDetails: List = await this.app
       .service("lists")
       .get(listId, params);
-
-      console.log("listDetails before", listDetails);
 
     const listData: List = {
       ...listDetails,
       _updatedAt: createdAt,
     };
 
-    items.forEach((item: Item) => listData.items?.push(item = {...item, _id: new ObjectID()}));
+    console.log('items', items);
+    console.log('listData before', listData);
 
-    console.log("listDetails after", listDetails);
-    console.log("listData", listData);
+    // Only get items that need to be added to the list
+    const itemsToCreate: Item[] = items
+      .filter((item: Item) => !item._id);
+
+    itemsToCreate.forEach((item: Item) =>
+      listData.items?.push({...item, _id: new ObjectID()})
+    );
+
+    // Only get items that already exist in the list
+    const itemsToUpdate: Item[] = items
+      .filter((item: Item) =>
+        !itemsToCreate.includes(item));
+
+    itemsToUpdate.forEach((item: Item) => {
+      // IDs are passed in as a string and need to be converted back to an objectID
+      item._id = new ObjectID(item._id);
+      const index = listData.items?.findIndex((value: Item) =>
+        String(value._id) === String(item._id));
+      if (index && listData.items && listData.items[index]) {
+        listData.items[index] = item;
+      }
+    });
+
+    console.log('listData after', listData)
 
     return super.update(listId, listData, params);
   }
