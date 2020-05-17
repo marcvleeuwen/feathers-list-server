@@ -67,6 +67,6 @@ export class Items extends Service {
 
     listData.items = listData.items?.filter((item: Item) => String(item._id) !== String(id));
 
-    return super.update(params.query.from, listData, params);
+    return super.update(params.query.from, listData);
   }
 }
