@@ -33,7 +33,7 @@ export class Users extends Service {
     // create user object to be inserted
     const userData: User = {
       avatar: avatar || gravatar,
-      username: username,
+      username: username.toLowerCase(),
       password: password,
       _createdAt: createdAt,
     };
