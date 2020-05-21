@@ -35,7 +35,8 @@ export default function (app: Application) {
   const authentication = new AuthenticationService(app);
 
   authentication.register("jwt", new JWTStrategy());
-  authentication.register("local", new LocalStrategy());
+  authentication.register("username", new LocalStrategy());
+  authentication.register("email", new LocalStrategy());
   authentication.register("github", new GithubStrategy());
 
   app.use("/authentication", authentication);

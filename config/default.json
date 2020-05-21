@@ -12,7 +12,8 @@
     "secret": "AUTH_SECRET",
     "authStrategies": [
       "jwt",
-      "local"
+      "username",
+      "email"
     ],
     "jwtOptions": {
       "header": {
@@ -21,11 +22,18 @@
       "audience": "https://yourdomain.com",
       "issuer": "feathers",
       "algorithm": "HS256",
-      "expiresIn": "1d"
+      "expiresIn": "7d"
     },
-    "local": {
+    "username": {
+      "name": "username",
       "entity": "user",
       "usernameField": "\\username",
+      "passwordField": "password"
+    },
+    "email": {
+      "name": "email",
+      "entity": "user",
+      "usernameField": "email",
       "passwordField": "password"
     },
     "oauth": {

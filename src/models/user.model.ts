@@ -2,6 +2,7 @@ import { Provider } from "./provider.model";
 
 export interface User {
   _id?: string;
+  emial?:string;
   username?: string;
   avatar?: string;
   password?: string;
