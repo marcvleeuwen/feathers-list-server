@@ -11,7 +11,7 @@ export default {
     all: [],
     find: [ authenticate('jwt') ],
     get: [ authenticate('jwt') ],
-    create: [hashPassword('password'), newUser()],
+    create: [hashPassword('password', {strategy: 'username'}), newUser()],
     update: [hashPassword('password'), authenticate('jwt')],
     patch: [hashPassword('password'), authenticate('jwt')],
     remove: [ authenticate('jwt') ]
